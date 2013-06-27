@@ -5,7 +5,7 @@ type env = {
 }
 
 
-let create () = {
+let empty = {
   types = [];
   insts = [];
   lastvar = Hm_type.zero_var;
@@ -19,7 +19,7 @@ let combine env1 env2 = {
 }
 
 
-let add env name ty = {
+let add name ty env = {
   env with
   types = (name, ty) :: env.types;
 }

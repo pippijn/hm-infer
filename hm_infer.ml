@@ -45,7 +45,7 @@ let resolve env ty =
         in
         var_env, Oper (name, List.rev args)
   in
-  snd (resolve_vars (fun vars ty -> freshvar vars ty) (Hm_env.create (), []) ty)
+  snd (resolve_vars (fun vars ty -> freshvar vars ty) (Hm_env.empty, []) ty)
 
 
 (** Returns the currently defining instance of [ty]. *)
@@ -196,7 +196,7 @@ let rec analyse env nongen ast =
         let env, argtype =
           match Hm_env.new_var env with
           | env, (Var _ as argtype) ->
-              Hm_env.add env var argtype, argtype
+              Hm_env.add var argtype env, argtype
           | _ -> failwith "impossible"
         in
 
@@ -213,7 +213,7 @@ let rec analyse env nongen ast =
         (* analyse the definition *)
         let env, defntype = analyse env nongen defn in
         (* this is then the type of the binder (which is now generic) *)
-        let env = Hm_env.add env var defntype in
+        let env = Hm_env.add var defntype env in
         (* analyse the body *)
         let env, lettype = analyse env nongen body in
 
@@ -226,7 +226,7 @@ let rec analyse env nongen ast =
 
         (* generate a new non-generic type for the binder *)
         let env, newtype = Hm_env.new_var env in
-        let env = Hm_env.add env var newtype in
+        let env = Hm_env.add var newtype env in
         (* analyse the type of the definition, with the binder type
          * being non-generic (as if we were using the fixed point combinator) *)
         let env, defntype = analyse env (newtype :: nongen) defn in

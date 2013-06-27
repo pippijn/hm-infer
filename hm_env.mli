@@ -2,13 +2,13 @@
     copies are created on each modification. *)
 type env
 
-val create : unit -> env
+val empty : env
   (** Create a new environment with the first type variable set to 'a'. *)
 val combine : env -> env -> env
   (** Return the first [env] but with the second [env]'s type variable
       instances and variable count. *)
 
-val add : env -> string -> Hm_type.ty -> env
+val add : string -> Hm_type.ty -> env -> env
   (** Returns a new environment with a typed symbol added to it. Leaves the
       old environment untouched. *)
 val find : env -> string -> Hm_type.ty

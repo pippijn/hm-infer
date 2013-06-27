@@ -1,3 +1,5 @@
+let (|>) f x = x f
+
 let expr_of_string code =
   let lexbuf = Lexing.from_string code in
   Hm_parser.expression Hm_lexer.token lexbuf
@@ -9,27 +11,25 @@ let type_of_string code =
 
 
 let env =
-  let env = Hm_env.create () in
+  Hm_env.empty
 
-  let env = Hm_env.add env "true" (type_of_string "bool") in
-  let env = Hm_env.add env "false" (type_of_string "bool") in
+  |> Hm_env.add "true" (type_of_string "bool")
+  |> Hm_env.add "false" (type_of_string "bool")
 
   (* pair: a -> b -> (a * b) *)
-  let env = Hm_env.add env "pair" (type_of_string "'a -> 'b -> 'a * 'b") in
+  |> Hm_env.add "pair" (type_of_string "'a -> 'b -> 'a * 'b")
 
   (* cond: bool -> a -> a -> a *)
-  let env = Hm_env.add env "cond" (type_of_string "bool -> 'c -> 'c -> 'c") in
+  |> Hm_env.add "cond" (type_of_string "bool -> 'c -> 'c -> 'c")
 
   (* zero: int -> bool *)
-  let env = Hm_env.add env "zero" (type_of_string "int -> bool") in
+  |> Hm_env.add "zero" (type_of_string "int -> bool")
 
   (* pred: int -> int *)
-  let env = Hm_env.add env "pred" (type_of_string "int -> int") in
+  |> Hm_env.add "pred" (type_of_string "int -> int")
 
   (* times: int -> int -> int *)
-  let env = Hm_env.add env "times" (type_of_string "int -> int -> int") in
-
-  env
+  |> Hm_env.add "times" (type_of_string "int -> int -> int")
 
 
 let tryexp exp =
@@ -96,15 +96,15 @@ let selftest () =
 
 let () =
   Printexc.record_backtrace true;
-  match Sys.argv.(1) with
-  | "-" ->
+  match Sys.argv with
+  | [|_; "-"|] ->
       let lexbuf = Lexing.from_channel stdin in
       begin try
         tryexp (Hm_parser.expression Hm_lexer.token lexbuf)
       with Hm_parser.StateError (token, state) ->
         Printf.printf "%s\n" (Hm_errors.message state token)
       end
-  | "-merr" ->
+  | [|_; "-merr"|] ->
       let lexbuf = Lexing.from_channel stdin in
       begin try
         tryexp (Hm_parser.expression Hm_lexer.token lexbuf)

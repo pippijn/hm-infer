@@ -1,5 +1,6 @@
-module Tokens = Hm_parser
-open Hm_parser
+module Tokens = Hm_tokens
+
+open Hm_tokens
 open Hm_token
 
 let message = function

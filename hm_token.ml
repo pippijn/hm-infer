@@ -1,4 +1,4 @@
-open Hm_parser
+open Hm_tokens
 
 let string_of_token = function
   | TK_TVAR tvar -> "'" ^ tvar

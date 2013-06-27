@@ -20,14 +20,14 @@ let succ_var var = var + 1
 let rec string_of_var var =
   let a = int_of_char 'a' in
   if var < 26 then
-    ExString.of_char (char_of_int (int_of_char 'a' + var))
+    BatString.of_char (char_of_int (int_of_char 'a' + var))
   else
     string_of_var (var / 26 - 1) ^ string_of_var (var mod 26)
 
 
 let var_of_string s =
   let a = int_of_char 'a' in
-  snd (ExString.fold_right (fun c (multiplier, var) ->
+  snd (BatString.fold_right (fun c (multiplier, var) ->
     multiplier * 26, var + (int_of_char c - a + 1) * multiplier
   ) s (1, 0)) - 1
 

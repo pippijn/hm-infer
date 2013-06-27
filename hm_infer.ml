@@ -32,7 +32,7 @@ let resolve env ty =
   let rec resolve_vars fresh var_env = function
     | Var name as ty ->
         begin try
-          resolve_vars fresh var_env (Hm_env.find_instance env name)
+          resolve_vars fresh var_env (Hm_env.find_instance name env)
         with Not_found ->
           fresh var_env ty
         end
@@ -52,7 +52,7 @@ let resolve env ty =
 let rec prune env = function
   | Var name as ty ->
       begin try
-        let instance = Hm_env.find_instance env name in
+        let instance = Hm_env.find_instance name env in
         if ty == instance then
           die TypeRecursion;
         prune env instance
@@ -104,7 +104,7 @@ let fresh env ty nongen =
 let gettype name env nongen =
   let ty =
     try
-      Hm_env.find env name
+      Hm_env.find name env
     with Not_found ->
       die (Undefined name)
   in
@@ -132,7 +132,7 @@ let rec unify env ty1 ty2 nongen =
 
   | Var name, ty2 ->
       (* define a type instance *)
-      Hm_env.add_instance env name ty2, ty1, ty2
+      Hm_env.add_instance name ty2 env, ty1, ty2
 
   | Oper (name, args), Var _ ->
       let env, ty2, ty1 = unify env ty2 ty1 nongen in

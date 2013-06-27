@@ -24,10 +24,10 @@ let add name ty env = {
   types = (name, ty) :: env.types;
 }
 
-let find env name =
+let find name env =
   snd (List.find (fun (nm, _) -> nm = name) env.types)
 
-let mem env name =
+let mem name env =
   List.exists (fun (nm, _) -> nm = name) env.types
 
 let iter fn env =
@@ -37,15 +37,15 @@ let fold_left fn a env =
   List.fold_left fn a env.types
 
 
-let add_instance env name ty = {
+let add_instance name ty env = {
   env with
   insts = (name, ty) :: env.insts;
 }
 
-let find_instance env name =
+let find_instance name env =
   snd (List.find (fun (nm, _) -> nm = name) env.insts)
 
-let mem_instance env name =
+let mem_instance name env =
   List.exists (fun (nm, _) -> nm = name) env.insts
 
 let iter_instance fn env =

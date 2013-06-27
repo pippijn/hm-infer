@@ -11,23 +11,23 @@ val combine : env -> env -> env
 val add : string -> Hm_type.ty -> env -> env
   (** Returns a new environment with a typed symbol added to it. Leaves the
       old environment untouched. *)
-val find : env -> string -> Hm_type.ty
+val find : string -> env -> Hm_type.ty
   (** Return the type added by [add].
       @raise [Not_found] if there was no corresponding call to [add]. *)
-val mem : env -> string -> bool
+val mem : string -> env -> bool
   (** Return [true] if [find] would not raise [Not_found]. *)
 val iter : (string * Hm_type.ty -> unit) -> env -> unit
   (** Iterate over symbol/type pairs. *)
 val fold_left : ('a -> string * Hm_type.ty -> 'a) -> 'a -> env -> 'a
   (** Fold over symbol/type pairs. *)
 
-val add_instance : env -> Hm_type.var -> Hm_type.ty -> env
+val add_instance : Hm_type.var -> Hm_type.ty -> env -> env
   (** Returns a new environment with an instance attached to a type variable.
       Leaves the old environment untouched. *)
-val find_instance : env -> Hm_type.var -> Hm_type.ty
+val find_instance : Hm_type.var -> env -> Hm_type.ty
   (** Return the instance added by [add_instance].
       @raise [Not_found] if there was no corresponding call to [add_instance]. *)
-val mem_instance : env -> Hm_type.var -> bool
+val mem_instance : Hm_type.var -> env -> bool
   (** Return [true] if [find_instance] would not raise [Not_found]. *)
 val iter_instance : (Hm_type.var * Hm_type.ty -> unit) -> env -> unit
   (** Iterate over var/instance pairs. *)

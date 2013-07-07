@@ -1,4 +1,4 @@
-let (|>) f x = x f
+let (|>) x f = f x
 
 let expr_of_string code =
   let lexbuf = Lexing.from_string code in

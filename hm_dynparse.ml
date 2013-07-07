@@ -1,4 +1,4 @@
-let (|>) f x = x f
+let (|>) x f = f x
 
 let title = "Hindley-Milner example"
 let missing_title = "Environment"

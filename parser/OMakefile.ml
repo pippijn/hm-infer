@@ -1,10 +1,11 @@
-install Program ".DEFAULT" [
+install Library ".DEFAULT" [
   (* Target *)
   Name		"hm";
+  Description	"Hindley-Milner type inference";
+  Version	"0.1";
 
   (* Sources *)
   Modules [
-    "Hm";
     "Hm_ast";
     "Hm_dynparse";
     "Hm_env";
@@ -21,15 +22,7 @@ install Program ".DEFAULT" [
   OCamlRequires [
     "batteries";
     "libmerr";
-    "sexplib.syntax";
   ];
 
-  (* Camlp4 *)
-  Flags [
-    "a_ast.ml",		"-syntax camlp4o";
-    "e_ast.ml",		"-syntax camlp4o";
-    "makeErr.ml",	"-syntax camlp4o";
-  ];
-
-  Var ("RUNMERR", "hm.native -merr");
+  Var ("RUNMERR", "$(bindir)/hm.native -merr");
 ]

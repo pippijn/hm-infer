@@ -1,0 +1,10 @@
+=head1 Hindley-Milner typer
+
+This is a tiny Hindley-Milner type inference exercise written from scratch in
+OCaml. I'm not sure what I want to do with this, yet. Perhaps it can be used in
+the C parser to provide some sort of HM-style type inference and polymorphism
+(instead of C<void*>) in C.
+
+L<Try it out|online> in your browser.
+
+L<Git repository|https://github.com/pippijn/hm-infer>

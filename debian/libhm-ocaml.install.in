@@ -1,0 +1,3 @@
+@OCamlStdlibDir@/hm/META
+@OCamlStdlibDir@/hm/*.cma
+@OCamlStdlibDir@/hm/*.cmxs

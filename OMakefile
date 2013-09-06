@@ -1,1 +1,13 @@
-recurse-into ($(glob D, *))
+SUBDIRS[] =
+  hm
+  parser
+
+if $(has-ocaml-package gtk_intf):
+  SUBDIRS += hm_gtk
+  export
+
+if $(has-ocaml-package js_intf):
+  SUBDIRS += hm_js
+  export
+
+recurse-into ($(SUBDIRS))

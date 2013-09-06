@@ -1,0 +1,3 @@
+@OCamlStdlibDir@/hm/*.a
+@OCamlStdlibDir@/hm/*.cm[ix]
+@OCamlStdlibDir@/hm/*.cmxa

@@ -1,0 +1,22 @@
+# Target
+Name = hm_js
+
+# Sources
+OCaml-Sources[] =
+  Hm_js
+
+# Library dependencies
+OCaml-Requires[] =
+  hm
+  js_intf
+
+# Only byte-code
+OCAML_BYTE = true
+OCAML_NATIVE = false
+
+upload: $(Name).js
+  chmod 644 $^
+  scp $^ ra:public_html/files/up/parser/
+
+TARGET = $(program)
+.DEFAULT: $(TARGET)

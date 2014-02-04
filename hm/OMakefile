@@ -1,0 +1,10 @@
+Name = hm
+
+OCaml-Sources[] =
+  Hm
+
+OCaml-Requires[] =
+  hm
+
+TARGET = $(program-install)
+.DEFAULT: $(TARGET)

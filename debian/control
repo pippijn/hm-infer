@@ -7,8 +7,11 @@ Uploaders:
 Build-Depends:
   ocaml-nox (>= 3.12),
   ocaml-findlib,
-  git,
   obuild,
+  menhir,
+  merr,
+  libbatteries-ocaml-dev,
+  libmerr-ocaml-dev,
   libsexplib-camlp4-dev,
   dh-ocaml,
   debhelper (>= 8.0.0)

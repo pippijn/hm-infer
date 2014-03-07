@@ -1,5 +1,5 @@
 # Target
-Name = hm_js
+Name		= hm_js
 
 # Sources
 OCaml-Sources[] =

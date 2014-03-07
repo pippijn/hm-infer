@@ -1,5 +1,5 @@
 # Target
-Name = hm_gtk
+Name		= hm_gtk
 
 # Sources
 OCaml-Sources[] =
